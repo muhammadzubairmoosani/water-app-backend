@@ -29,6 +29,9 @@ const signUpSupplier = new Schema({
     type: Array,
     required: true,
   },
+  thumbnailUrls: {
+    type: Array,
+  },
 });
 
 const signUpSupplierSchema = mongoose.model("suppliers", signUpSupplier);

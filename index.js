@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.port || 4000;
-const mongodb = require("./config/config_db");
+const mongodb = require("./config/config");
 const cors = require("cors");
 
 mongodb.connection.once("open", () => console.log("database is connected!"));
