@@ -29,7 +29,7 @@ const signUpSupplier = new Schema({
     type: Array,
     required: true,
   },
-  thumbnailUrls: {
+  images: {
     type: Array,
   },
 });
