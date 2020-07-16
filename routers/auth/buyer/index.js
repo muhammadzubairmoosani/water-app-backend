@@ -9,6 +9,13 @@ router.post("/buyer-register", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/buyer-login", (req, res, next) => {
+  buyerLoginSchema
+    .create(req.body)
+    .then((snap) => res.send(snap))
+    .catch(next);
+});
+
 const signUpBuyerRouters = router;
 
 module.exports = signUpBuyerRouters;
