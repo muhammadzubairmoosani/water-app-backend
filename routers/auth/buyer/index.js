@@ -1,29 +1,24 @@
 const express = require("express");
 const router = express.Router();
 // const mongoose = require("../../../config/config")
-const mongoose = require("mongoose")
-const {
-  loginBuyerSchema,
-  registerBuyerSchema,
-} = require("../../../schemas/index");
+// const mongoose = require("mongoose");
+const { buyerSchema } = require("../../../schemas/index");
 
-router.get("/buyer-login", (req, res, next) => {
-  console.log("req",req.body)
-  registerBuyerSchema.find({mobile: req.body.mobile})
-  .then(data => console.log(data))
-  .catch(err => console.log(err))
-
-  // .then((snap) => res.send(snap))
-  // .catch(next);
+router.get("/buyer-login/:id", (req, res, next) => {
+  console.log("req", req.body);
+  buyerSchema
+    .findOne({ mobile: req.params.id })
+    .then((snap) => res.send(snap))
+    .catch(next);
 });
 
 router.post("/buyer-register", (req, res, next) => {
-  registerBuyerSchema
+  buyerSchema
     .create(req.body)
     .then((snap) => res.send(snap))
     .catch(next);
 });
 
-const signUpBuyerRouters = router;
+const buyerRouters = router;
 
-module.exports = signUpBuyerRouters;
+module.exports = buyerRouters;
