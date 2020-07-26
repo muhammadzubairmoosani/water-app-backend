@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { signUpSupplierSchema } = require("../../../schemas/index");
+const { supplierSchema } = require("../../../schemas/index");
+
+router.get("/supplier-login/:id", (req, res, next) => {
+  supplierSchema
+    .findOne({ mobile1: req.params.id })
+    .then((snap) => res.send(snap))
+    .catch(next);
+});
 
 router.post("/supplier-register", (req, res, next) => {
-    signUpSupplierSchema
+  supplierSchema
     .create(req.body)
     .then((snap) => res.send(snap))
     .catch(next);

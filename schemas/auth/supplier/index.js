@@ -1,3 +1,39 @@
-const registerSupplierSchema = require("./register");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-module.exports = { registerSupplierSchema };
+const supplier = new Schema({
+  company_name: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  mobile1: {
+    type: String,
+    required: true,
+  },
+  mobile2: {
+    type: String,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  company_address: {
+    type: String,
+    required: true,
+  },
+  services: {
+    type: Array,
+    required: true,
+  },
+  images: {
+    type: Array,
+  },
+});
+
+const supplierSchema = mongoose.model("suppliers", supplier);
+
+module.exports = supplierSchema;
