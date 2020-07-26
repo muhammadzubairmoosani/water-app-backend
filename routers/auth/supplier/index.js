@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { supplierSchema } = require("../../../schemas/index");
+const { supplierSchema } = require("../../../schemas");
 
 router.get("/supplier-login/:id", (req, res, next) => {
   supplierSchema

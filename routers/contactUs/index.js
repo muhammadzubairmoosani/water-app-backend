@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { contactUsSchema } = require("../../schemas/index");
+const { contactUsSchema } = require("../../schemas");
 
 router.post("/contact-us", (req, res, next) => {
   contactUsSchema

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { buyerSchema } = require("../../../schemas/index");
+const { buyerSchema } = require("../../../schemas");
 
 router.get("/buyer-login/:id", (req, res, next) => {
   buyerSchema

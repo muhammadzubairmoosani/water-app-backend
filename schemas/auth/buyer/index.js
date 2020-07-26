@@ -22,4 +22,4 @@ const buyer = new Schema({
 
 const buyerSchema = mongoose.model("buyers", buyer);
 
-module.exports = { buyerSchema };
+module.exports = buyerSchema;
