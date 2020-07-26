@@ -10,6 +10,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/", require("./routers/index"));
+app.use("/", require("./routers"));
 
 app.listen(port, () => console.log(`server is listing on port ${port}`));
