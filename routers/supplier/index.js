@@ -9,6 +9,14 @@ router.get("/supplier-list", (req, res, next) => {
     .catch(next);
 });
 
-const SupplierListRouters = router;
+router.get("/supplier-detail/:id", (req, res, next) => {
+  console.log(req.params.id)
+  supplierSchema
+    .findById(req.params.id)
+    .then((snap) => res.send(snap))
+    .catch(next);
+});
 
-module.exports = SupplierListRouters;
+const supplierRouters = router;
+
+module.exports = supplierRouters;
