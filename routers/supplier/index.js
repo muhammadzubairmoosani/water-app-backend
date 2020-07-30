@@ -10,7 +10,6 @@ router.get("/supplier-list", (req, res, next) => {
 });
 
 router.get("/supplier-detail/:id", (req, res, next) => {
-  console.log(req.params.id)
   supplierSchema
     .findById(req.params.id)
     .then((snap) => res.send(snap))
