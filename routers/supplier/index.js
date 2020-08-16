@@ -2,9 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { supplierSchema } = require("../../schemas");
 
-router.get("/supplier-list", (req, res, next) => {
+router.get("/supplier-list/:skip/:limit", (req, res, next) => {
+  const { skip, limit } = req.params;
   supplierSchema
     .find({})
+    .skip(Number(skip))
+    .limit(Number(limit))
     .then((snap) => res.send(snap))
     .catch(next);
 });
