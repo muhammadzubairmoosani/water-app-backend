@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const buyer = new Schema({
+  time_stemp: {
+    type: Number,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

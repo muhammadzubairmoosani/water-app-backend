@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const supplier = new Schema({
+  time_stemp: {
+    type: Number,
+    required: true,
+  },
   company_name: {
     type: String,
     required: true,
