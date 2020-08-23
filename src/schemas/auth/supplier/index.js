@@ -6,6 +6,10 @@ const supplier = new Schema({
     type: Number,
     required: true,
   },
+  user_type: {
+    type: String,
+    required: true,
+  },
   company_name: {
     type: String,
     required: true,

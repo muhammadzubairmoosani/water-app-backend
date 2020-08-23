@@ -6,6 +6,10 @@ const buyer = new Schema({
     type: Number,
     required: true,
   },
+  user_type: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
