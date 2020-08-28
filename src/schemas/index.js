@@ -1,9 +1,8 @@
 const contactUsSchema = require("./contactUs");
-const buyerSchema = require("./auth/buyer");
-const supplierSchema = require("./auth/supplier");
+const { buyerSchema, supplierSchema } = require("./auth");
 
 module.exports = {
-  contactUsSchema,
   buyerSchema,
   supplierSchema,
+  contactUsSchema,
 };
