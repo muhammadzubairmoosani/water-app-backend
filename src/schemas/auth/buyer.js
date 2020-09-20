@@ -6,6 +6,10 @@ const buyer = new Schema({
     type: Number,
     required: true,
   },
+  role: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -23,10 +27,6 @@ const buyer = new Schema({
     required: true,
   },
   firebase_uid: {
-    type: String,
-    required: true,
-  },
-  role: {
     type: String,
     required: true,
   },

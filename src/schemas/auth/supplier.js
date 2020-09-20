@@ -6,7 +6,7 @@ const supplier = new Schema({
     type: Number,
     required: true,
   },
-  user_type: {
+  role: {
     type: String,
     required: true,
   },
@@ -22,14 +22,19 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  mobile2: {
-    type: String,
-  },
   password: {
     type: String,
     required: true,
   },
-  company_address: {
+  address: {
+    type: String,
+    required: true,
+  },
+  area_of_working: {
+    type: Array,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },
@@ -39,6 +44,10 @@ const supplier = new Schema({
   },
   images: {
     type: Array,
+  },
+  firebase_uid: {
+    type: String,
+    required: true,
   },
 });
 
