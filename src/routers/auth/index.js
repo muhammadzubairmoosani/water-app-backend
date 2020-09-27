@@ -1,13 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { buyerSchema, supplierSchema } = require("../../schemas");
-
-router.get("/buyer-login/:id", (req, res, next) => {
-  buyerSchema
-    .findOne({ mobile: req.params.id })
-    .then((snap) => res.send(snap))
-    .catch(next);
-});
+const { supplierSchema } = require("../../schemas");
 
 router.post("/buyer-register", (req, res, next) => {
   buyerSchema
