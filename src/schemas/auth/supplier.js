@@ -18,7 +18,7 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  mobile1: {
+  mobile: {
     type: String,
     required: true,
   },
