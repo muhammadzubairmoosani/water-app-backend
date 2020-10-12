@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 const mongodb = require("./src/config/config");
 const cors = require("cors");
 
