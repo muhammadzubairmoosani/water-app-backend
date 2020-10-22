@@ -3,30 +3,39 @@ const router = express.Router();
 const { supplierSchema } = require("../../schemas");
 const jwt = require("jsonwebtoken");
 
-router.post("/buyer-register", (req, res, next) => {
-  buyerSchema
-    .create(req.body)
-    .then((snap) => res.send(snap))
-    .catch(next);
-});
-
 router.get("/supplier-login/:id", (req, res, next) => {
-  supplierSchema
-    .findOne({ mobile: req.params.id })
-    .then((data) => {
-      const token = jwt.sign(
-        { mobile: req.params.id },
-        process.env.REACT_APP_ACCESS_TOKEN_SECRET
-      );
-      res.send({ data, token });
-    })
-    .catch(next);
+  // console.log(req.headers.cookie)
+  console.log('Cookies: ', req.headers)
+  // supplierSchema
+    // .findOne({ mobile: req.params.id })
+    // .then((data) => {
+    //   const token = jwt.sign(
+    //     { mobile: req.params.id },
+    //     process.env.REACT_APP_ACCESS_TOKEN_SECRET
+    //   );
+    //   res.send({ data, token });
+    // })
+    // .catch(next);
 });
 
 router.post("/supplier-register", (req, res, next) => {
   supplierSchema
     .create(req.body)
-    .then((snap) => res.send(snap))
+    .then((user) => {
+      const options = {
+        expiresIn: "1y",
+        audience: user._id,
+        role: "supplier",
+      };
+      const token = jwt.sign(
+        options,
+        process.env.REACT_APP_ACCESS_TOKEN_SECRET
+      );
+      res.send({
+        access_token: token,
+        refresh_token: process.env.REACT_APP_REFRESH_TOKEN_SECRET,
+      });
+    })
     .catch(next);
 });
 
