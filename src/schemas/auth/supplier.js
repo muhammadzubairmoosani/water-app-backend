@@ -10,14 +10,14 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  // company_name: {
-  //   type: String,
-  //   required: true,
-  // },
-  // name: {
-  //   type: String,
-  //   required: true,
-  // },
+  company_name: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
   mobile: {
     type: String,
     required: true,
@@ -26,29 +26,29 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  // address: {
-  //   type: String,
-  //   required: true,
-  // },
-  // area_of_working: {
-  //   type: Array,
-  //   required: true,
-  // },
-  // description: {
-  //   type: String,
-  //   required: true,
-  // },
-  // services: {
-  //   type: Array,
-  //   required: true,
-  // },
-  // images: {
-  //   type: Array,
-  // },
-  // firebase_uid: {
-  //   type: String,
-  //   required: true,
-  // },
+  address: {
+    type: String,
+    required: true,
+  },
+  area_of_working: {
+    type: Array,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  services: {
+    type: Array,
+    required: true,
+  },
+  images: {
+    type: Array,
+  },
+  firebase_uid: {
+    type: String,
+    required: true,
+  },
 });
 
 const supplierSchema = mongoose.model("suppliers", supplier);
