@@ -6,8 +6,8 @@ router.get("/supplier-list/:skip/:limit", (req, res, next) => {
   const { skip, limit } = req.params;
   supplierSchema
     .find({})
-    .skip(Number(skip))
-    .limit(Number(limit))
+    .skip(parseInt(skip))
+    .limit(parseInt(limit))
     .then((snap) => res.send(snap))
     .catch(next);
 });
