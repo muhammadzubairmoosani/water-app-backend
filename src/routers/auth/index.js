@@ -6,21 +6,22 @@ const jwt = require("jsonwebtoken");
 router.get("/supplier-login/:id", (req, res, next) => {
   supplierSchema
     .findOne({ mobile: req.params.id })
-    .then((user) => {
-      if (!user) {
-        res.send({ message: "Incorrect number or password." });
-      }
-      const token = jwt.sign({
-        expiresIn: "1y",
-        userId: user._id,
-        role: "supplier",
-      });
-      res.send({
-        message: "Login successfully...!",
-        user,
-        access_token: token,
-        refresh_token: "process.env.REACT_APP_REFRESH_TOKEN_SECRET",
-      });
+    .then((res) => {
+      console.log("user",res)
+      // if (!user) {
+      //   res.send({ message: "Incorrect number or password." });
+      // }
+      // const token = jwt.sign({
+      //   expiresIn: "1y",
+      //   userId: user._id,
+      //   role: "supplier",
+      // });
+      // res.send({
+      //   message: "Login successfully...!",
+      //   user,
+      //   access_token: token,
+      //   refresh_token: "process.env.REACT_APP_REFRESH_TOKEN_SECRET",
+      // });
     })
     .catch(next);
 });

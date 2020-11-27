@@ -10,11 +10,7 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  company_name: {
-    type: String,
-    required: true,
-  },
-  name: {
+  firebase_uid: {
     type: String,
     required: true,
   },
@@ -26,28 +22,26 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+  },
+  company_name: {
+    type: String,
+  },
   address: {
     type: String,
-    required: true,
   },
   area_of_working: {
     type: Array,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
   },
   services: {
     type: Array,
-    required: true,
+  },
+  description: {
+    type: String,
   },
   images: {
     type: Array,
-  },
-  firebase_uid: {
-    type: String,
-    required: true,
   },
 });
 
