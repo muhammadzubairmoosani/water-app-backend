@@ -10,15 +10,11 @@ router.get("/supplier-login/:id", (req, res, next) => {
       if (!user) {
         res.send({ message: "Incorrect number or password." });
       }
-      const options = {
+      const token = jwt.sign({
         expiresIn: "1y",
         userId: user._id,
         role: "supplier",
-      };
-      const token = jwt.sign(
-        options,
-        "process.env.REACT_APP_ACCESS_TOKEN_SECRET"
-      );
+      });
       res.send({
         message: "Login successfully...!",
         user,
