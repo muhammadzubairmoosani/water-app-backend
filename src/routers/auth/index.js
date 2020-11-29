@@ -2,48 +2,39 @@ const express = require("express");
 const router = express.Router();
 const { supplierSchema } = require("../../schemas");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-router.get("/supplier-login/:id", (req, res, next) => {
+router.get("/supplier-login", (req, res, next) => {
   supplierSchema
-    .findOne({ mobile: req.params.id })
-    .then((res) => {
-      console.log("user",res)
-      // if (!user) {
-      //   res.send({ message: "Incorrect number or password." });
-      // }
-      // const token = jwt.sign({
-      //   expiresIn: "1y",
-      //   userId: user._id,
-      //   role: "supplier",
-      // });
-      // res.send({
-      //   message: "Login successfully...!",
-      //   user,
-      //   access_token: token,
-      //   refresh_token: "process.env.REACT_APP_REFRESH_TOKEN_SECRET",
-      // });
+    .findOne({ mobile: req.query.mobile })
+    .then((user) => {
+      if (user === null) {
+        res
+          .status(404)
+          .send({ message: "Incorrect mobile or password, Please try again." });
+      } else {
+        if (bcrypt.compareSync(req.query.password, user.password)) {
+          res.send(user);
+        } else {
+          res
+            .status(404)
+            .send({ message: "Incorrect password, Please try again." });
+        }
+      }
     })
     .catch(next);
 });
 
 router.post("/supplier-register", (req, res, next) => {
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  req.body.password = hash;
   supplierSchema
     .create(req.body)
-    .then(() => res.send("Registered successfully. please login...!"))
+    .then(() =>
+      res.send({ message: "Registered successfully. Please login...!" })
+    )
     .catch(next);
 });
-
-// function anthenticateToken(req, res, next) {
-//   const authHeader = req.headers["authorization"];
-//   const token = authHeader && authHeader.split(" ")[1];
-//   if (token === null) return res.sendStatus(401);
-
-//   jwt.verify(token, process.env.REACT_APP_ACCESS_TOKEN_SECRET, (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// }
 
 const authRoutes = router;
 
