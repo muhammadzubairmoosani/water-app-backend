@@ -5,16 +5,22 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/supplier-login", (req, res, next) => {
+  const { mobile, password } = req.query;
   supplierSchema
-    .findOne({ mobile: req.query.mobile })
+    .findOne({ mobile: mobile })
     .then((user) => {
       if (user === null) {
         res
           .status(404)
           .send({ message: "Incorrect mobile or password, Please try again." });
       } else {
-        if (bcrypt.compareSync(req.query.password, user.password)) {
-          res.send(user);
+        if (bcrypt.compareSync(password, user.password)) {
+          const { role } = user;
+          var access_token = jwt.sign(
+            { role: role },
+            process.env.REACT_APP_ACCESS_TOKEN_SECRET
+          );
+          res.json({ access_token: access_token, user: user }).send();
         } else {
           res
             .status(404)
