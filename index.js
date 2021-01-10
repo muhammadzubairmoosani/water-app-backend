@@ -6,7 +6,7 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 
-mongodb.connection.once("open", () => console.log("database is connected!"));
+app.use(express.json());
 
 app.use(
   cors({
@@ -14,8 +14,6 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
-
-app.use(express.json());
 
 app.use(
   cookieSession({
@@ -34,3 +32,4 @@ app.use(passport.session());
 app.use("/", require("./src/routers"));
 
 app.listen(port, () => console.log(`server is listing on port ${port}`));
+mongodb.connection.once("open", () => console.log("database is connected!"));

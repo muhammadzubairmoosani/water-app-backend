@@ -1,24 +1,27 @@
 const LocalStrategy = require("passport-local").Strategy;
 const { User } = require("../schemas");
 
-const SignupStrategy = new LocalStrategy((mobile, password, done) => {
-  console.log("===== ", mobile, password);
+const SignupStrategy = new LocalStrategy(
+  { passReqToCallback: true },
+  (req, username, password, done) => {
+    User.findOne({ mobile: req.body.mobile }, (error, user) => {
+      if (error) {
+        return done(error.message);
+      }
 
-  User.findOne({ mobile: mobile }, (error, user) => {
-    if (error) {
-      return done(error.message);
-    }
+      if (user) {
+        return done("user already axists");
+      }
 
-    if (user) {
-      return done("user already axists");
-    }
+      if (!user) {
+        return User.create({ mobile: req.body.mobile, password })
+          .then((user) => done(null, user))
+          .catch((err) => done(err.message, null));
+      }
 
-    if (!user) {
-      return User.create({ mobile, password })
-        .then((user) => done(null, user))
-        .catch((err) => done(err.message, null));
-    }
-  });
-});
+      return done(null, user);
+    });
+  }
+);
 
 module.exports = SignupStrategy;
