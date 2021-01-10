@@ -1,5 +1,5 @@
-const supplierSchema = require("./supplier");
+const User = require("./supplier");
 
 module.exports = {
-  supplierSchema,
+  User,
 };
