@@ -4,10 +4,12 @@ const SignupStrategy = require("./signupStrategy");
 const SigninStrategy = require("./signinStrategy");
 
 passport.serializeUser((user, done) => {
+  console.log("serializeUser", user);
   done(null, user.mobile);
 });
 
 passport.deserializeUser((mobile, done) => {
+  console.log("deserializeUser", mobile);
   User.findOne({ mobile }, (err, user) => {
     done(err, user);
   });

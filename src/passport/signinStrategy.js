@@ -1,10 +1,11 @@
 const LocalStrategy = require("passport-local").Strategy;
 const { User } = require("../schemas");
+const bcrypt = require("bcrypt");
 
 const SigninStrategy = new LocalStrategy(
-  { passReqToCallback: true },
-  (req, username, password, done) => {
-    User.findOne({ mobile: req.body.mobile }, (error, user) => {
+  { usernameField: "mobile" },
+  (username, password, done) => {
+    User.findOne({ mobile: username }, (error, user) => {
       if (error) {
         return done(error.message);
       }
@@ -13,7 +14,7 @@ const SigninStrategy = new LocalStrategy(
         return done("user not found!", false);
       }
 
-      if (user.password != password) {
+      if (bcrypt.compareSync(password, user.password)) {
         return done("Incorrect password", false);
       }
 
