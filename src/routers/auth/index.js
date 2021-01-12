@@ -14,6 +14,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  console.log("req", req.body);
   passport.authenticate("local-signin", (error, user) => {
     if (error) {
       return res.status(500).json({
@@ -29,8 +30,8 @@ router.post("/login", (req, res, next) => {
       }
 
       const newUser = user.toObject();
-      delete user.password;
-      user.isAuthenticated = true;
+      delete newUser.password;
+      newUser.isAuthenticated = true;
       return res.json(newUser);
     });
   })(req, res, next);

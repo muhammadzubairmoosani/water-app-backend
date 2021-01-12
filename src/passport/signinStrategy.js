@@ -14,7 +14,7 @@ const SigninStrategy = new LocalStrategy(
         return done("user not found!", false);
       }
 
-      if (bcrypt.compareSync(password, user.password)) {
+      if (!bcrypt.compareSync(password, user.password)) {
         return done("Incorrect password", false);
       }
 
