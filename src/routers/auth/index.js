@@ -3,13 +3,13 @@ const router = express.Router();
 const passport = require("../../passport");
 
 router.post("/signup", (req, res, next) => {
-  passport.authenticate("local-signup", (error, user, message) => {
+  passport.authenticate("local-signup", (error, data) => {
     if (error)
       return res.status(500).json({
         message: error || "Internal server error",
       });
 
-    return res.status(202).send();
+    return res.json({ data });
   })(req, res, next);
 });
 
