@@ -17,7 +17,7 @@ app.use(
 
 app.use(
   cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
     name: "session",
     keys: [
       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
