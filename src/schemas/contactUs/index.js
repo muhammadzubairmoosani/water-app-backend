@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const contactUs = new Schema({
   time_stemp: {
-    type: Number,
+    type: String,
     required: true,
   },
   name: {

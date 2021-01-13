@@ -9,7 +9,7 @@ router.post("/signup", (req, res, next) => {
         message: error || "Internal server error",
       });
 
-    return res.json({ data });
+    return res.send();
   })(req, res, next);
 });
 

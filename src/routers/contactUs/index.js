@@ -5,7 +5,7 @@ const { contactUsSchema } = require("../../schemas");
 router.post("/contact-us", (req, res, next) => {
   contactUsSchema
     .create(req.body)
-    .then((snap) => res.send(snap))
+    .then(() => res.send())
     .catch(next);
 });
 
