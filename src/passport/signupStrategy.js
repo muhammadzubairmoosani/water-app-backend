@@ -12,7 +12,7 @@ const SignupStrategy = new LocalStrategy(
       }
 
       if (user) {
-        return done("user already axists");
+        return done("User already axists");
       }
 
       if (!user) {
