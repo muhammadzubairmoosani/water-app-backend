@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../../schemas");
 
-router.get("/supplier-list/:skip/:limit", (req, res, next) => {
+router.get("/suppliers/:skip/:limit", (req, res, next) => {
   const { skip, limit } = req.params;
   User.find({})
     .skip(parseInt(skip))
