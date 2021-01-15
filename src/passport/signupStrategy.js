@@ -20,7 +20,7 @@ const SignupStrategy = new LocalStrategy(
           mobile: username,
           password: bcrypt.hashSync(password, 10),
         })
-          .then(() => done())
+          .then(() => done(null, false, "Sign-up success"))
           .catch((err) => done(err.message, null));
       }
     });

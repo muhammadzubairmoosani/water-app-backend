@@ -2,14 +2,20 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../../passport");
 
+router.get("/logged-in", (req, res) => {
+  if (req.user) return res.send(req.user);
+  return res.send(false);
+});
+
 router.post("/signup", (req, res, next) => {
-  passport.authenticate("local-signup", (error, data) => {
-    if (error)
+  passport.authenticate("local-signup", (error, data, message) => {
+    if (error) {
       return res.status(500).json({
         message: error || "Internal server error",
       });
+    }
 
-    return res.send();
+    return res.json({ message });
   })(req, res, next);
 });
 
@@ -35,6 +41,11 @@ router.post("/login", (req, res, next) => {
       return res.json(newUser);
     });
   })(req, res, next);
+});
+
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.json({ message: "Sign-out scccess" });
 });
 
 const authRoutes = router;
