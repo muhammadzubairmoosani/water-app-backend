@@ -19,6 +19,8 @@ const SignupStrategy = new LocalStrategy(
         return User.create({
           mobile: username,
           password: bcrypt.hashSync(password, 10),
+          role: "supplier",
+          firebase_uid: user.firebase_uid,
         })
           .then(() => done(null, false, "Sign-up success"))
           .catch((err) => done(err.message, null));

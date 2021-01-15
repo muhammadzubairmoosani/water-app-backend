@@ -1,7 +1,7 @@
-const contactUsSchema = require("./contactUs");
+const contactUs = require("./contactUs");
 const { User } = require("./auth");
 
 module.exports = {
   User,
-  contactUsSchema,
+  contactUs,
 };

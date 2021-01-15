@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { contactUsSchema } = require("../../schemas");
+const { contactUs } = require("../../schemas");
 
 router.post("/contact-us", (req, res, next) => {
-  contactUsSchema
+  contactUs
     .create(req.body)
     .then(() => res.send())
     .catch(next);
