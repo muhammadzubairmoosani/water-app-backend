@@ -1,24 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const supplier = new Schema({
+const UserSchema = new Schema({
   time_stemp: {
-    type: Number,
+    type: String,
     required: true,
   },
   role: {
     type: String,
     required: true,
   },
-  company_name: {
+  firebase_uid: {
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  mobile1: {
+  mobile: {
     type: String,
     required: true,
   },
@@ -26,31 +22,16 @@ const supplier = new Schema({
     type: String,
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
-  },
-  area_of_working: {
-    type: Array,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  services: {
-    type: Array,
-    required: true,
-  },
-  images: {
-    type: Array,
-  },
-  firebase_uid: {
-    type: String,
-    required: true,
-  },
+  mobile1: String,
+  name: String,
+  company_name: String,
+  address: String,
+  area_of_working: Array,
+  services: Array,
+  description: String,
+  images: Array,
 });
 
-const supplierSchema = mongoose.model("suppliers", supplier);
+const User = mongoose.model("users", UserSchema);
 
-module.exports = supplierSchema;
+module.exports = User;

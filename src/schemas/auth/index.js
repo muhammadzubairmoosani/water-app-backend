@@ -1,7 +1,5 @@
-const buyerSchema = require("./buyer");
-const supplierSchema = require("./supplier");
+const User = require("./supplier");
 
 module.exports = {
-  buyerSchema,
-  supplierSchema,
+  User,
 };

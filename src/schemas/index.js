@@ -1,8 +1,7 @@
-const contactUsSchema = require("./contactUs");
-const { buyerSchema, supplierSchema } = require("./auth");
+const contactUs = require("./contactUs");
+const { User } = require("./auth");
 
 module.exports = {
-  buyerSchema,
-  supplierSchema,
-  contactUsSchema,
+  User,
+  contactUs,
 };

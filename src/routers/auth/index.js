@@ -1,33 +1,50 @@
 const express = require("express");
 const router = express.Router();
-const { buyerSchema, supplierSchema } = require("../../schemas");
+const passport = require("../../passport");
 
-router.get("/buyer-login/:id", (req, res, next) => {
-  buyerSchema
-    .findOne({ mobile: req.params.id })
-    .then((snap) => res.send(snap))
-    .catch(next);
+router.get("/logged-in", (req, res) => {
+  if (req.user) return res.send(req.user);
+  return res.send(false);
 });
 
-router.post("/buyer-register", (req, res, next) => {
-  buyerSchema
-    .create(req.body)
-    .then((snap) => res.send(snap))
-    .catch(next);
+router.post("/signup", (req, res, next) => {
+  passport.authenticate("local-signup", (error, data, message) => {
+    if (error) {
+      return res.status(500).json({
+        message: error || "Internal server error",
+      });
+    }
+
+    return res.json({ message });
+  })(req, res, next);
 });
 
-router.get("/supplier-login/:id", (req, res, next) => {
-  supplierSchema
-    .findOne({ mobile: req.params.id })
-    .then((snap) => res.send(snap))
-    .catch(next);
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local-signin", (error, user) => {
+    if (error) {
+      return res.status(500).json({
+        message: error || "Internel server error",
+      });
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({
+          message: err || "Internel server error",
+        });
+      }
+
+      const newUser = user.toObject();
+      delete newUser.password;
+      newUser.isAuthenticated = true;
+      return res.json(newUser);
+    });
+  })(req, res, next);
 });
 
-router.post("/supplier-register", (req, res, next) => {
-  supplierSchema
-    .create(req.body)
-    .then((snap) => res.send(snap))
-    .catch(next);
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.json({ message: "Sign-out scccess" });
 });
 
 const authRoutes = router;

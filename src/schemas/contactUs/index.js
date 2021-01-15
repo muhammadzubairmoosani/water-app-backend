@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const contactUs = new Schema({
+const contactUsSchema = new Schema({
   time_stemp: {
-    type: Number,
+    type: String,
     required: true,
   },
   name: {
@@ -20,6 +20,6 @@ const contactUs = new Schema({
   },
 });
 
-const contactUsSchema = mongoose.model("contact-us", contactUs);
+const contactUs = mongoose.model("contact-us", contactUsSchema);
 
-module.exports = contactUsSchema;
+module.exports = contactUs;
