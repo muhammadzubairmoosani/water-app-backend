@@ -11,8 +11,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    // origin: "http://localhost:3000",
-    origin: "http://www.panivala.com",
+    origin: process.env.REACT_APP_ORIGIN,
   })
 );
 
