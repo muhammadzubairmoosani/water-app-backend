@@ -12,7 +12,7 @@ app.use(
   cors({
     credentials: true,
     // origin: "http://localhost:3000",
-    origin: "http://www.panivala.com"
+    origin: "http://www.panivala.com",
   })
 );
 
