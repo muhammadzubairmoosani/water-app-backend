@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../../passport");
+const https = require("https");
 
-router.get("/logged-in", (req, res) => {
+// router.get("/logged-in", (req, res) => {
+//   if (req.user) return res.send(req.user);
+//   return res.send(false);
+// });
+
+https.get("/logged-in", (req, res) => {
   if (req.user) return res.send(req.user);
   return res.send(false);
 });
