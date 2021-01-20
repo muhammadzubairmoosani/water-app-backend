@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-// const port = process.env.REACT_APP_PORT || 4000;
+const port = process.env.REACT_APP_PORT || 4000;
 const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const server = require("https").createServer();
 
 app.use(express.json());
 
@@ -13,6 +12,7 @@ app.use(
   cors({
     credentials: true,
     origin: process.env.REACT_APP_ORIGIN,
+    // origin: "http://localhost:3000/",
   })
 );
 
@@ -32,16 +32,5 @@ app.use(passport.session());
 
 app.use("/", require("./src/routers"));
 
-// server.listen(process.env.REACT_APP_SERVER_HOST, () => {
-//   console.log(`server is listing on host ${process.env.REACT_APP_SERVER_HOST}`);
-// });
-const options = {
-  host: "pani-vala-server.herokuapp.com",
-  port: 4000,
-};
-
-server.listen(options, () => {
-  console.log(`server is listing on port ${port}`);
-});
-
+app.listen(port, () => console.log(`server is listing on port ${port}`));
 mongodb.connection.once("open", () => console.log("database is connected!"));
