@@ -1,13 +1,12 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
 const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const port = process.env.REACT_APP_PORT || 4000;
 
 app.use(express.json());
-
 app.use(
   cors({
     credentials: true,
