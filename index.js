@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = process.env.REACT_APP_PORT || 4000;
 const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
@@ -12,7 +11,6 @@ app.use(
   cors({
     credentials: true,
     origin: process.env.REACT_APP_ORIGIN,
-    // origin: "http://localhost:3000/",
   })
 );
 
@@ -32,5 +30,7 @@ app.use(passport.session());
 
 app.use("/", require("./src/routers"));
 
-app.listen(port, () => console.log(`server is listing on port ${port}`));
+app.listen(process.env.REACT_APP_PORT, () =>
+  console.log(`server is listing...`)
+);
 mongodb.connection.once("open", () => console.log("database is connected!"));
