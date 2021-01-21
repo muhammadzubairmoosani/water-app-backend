@@ -4,13 +4,31 @@ const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const port = process.env.REACT_APP_PORT || 4000;
 
 app.use(express.json());
+
+var allowedOrigins = [
+  process.env.REACT_APP_LOCAL_HOST,
+  process.env.REACT_APP_ORIGIN,
+];
+
+console.log("host", allowedOrigins);
+
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      // if(!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
   })
 );
 
@@ -30,5 +48,7 @@ app.use(passport.session());
 
 app.use("/", require("./src/routers"));
 
-app.listen(port, () => console.log(`server is listing on port ${port}`));
+app.listen(process.env.REACT_APP_PORT, () =>
+  console.log(`server is listing...`)
+);
 mongodb.connection.once("open", () => console.log("database is connected!"));
