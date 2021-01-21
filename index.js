@@ -11,30 +11,24 @@ var allowedOrigins = [
   process.env.REACT_APP_LOCAL_HOST,
   process.env.REACT_APP_ORIGIN,
 ];
+
 app.use(
   cors({
     credentials: true,
-    origin: process.env.REACT_APP_ORIGIN,
+    origin: function (origin, callback) {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      // if(!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
   })
 );
-
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: function (origin, callback) {
-//       // allow requests with no origin
-//       // (like mobile apps or curl requests)
-//       // if(!origin) return callback(null, true);
-//       if (allowedOrigins.indexOf(origin) === -1) {
-//         var msg =
-//           "The CORS policy for this site does not " +
-//           "allow access from the specified Origin.";
-//         return callback(new Error(msg), false);
-//       }
-//       return callback(null, true);
-//     },
-//   })
-// );
 
 app.use(
   cookieSession({
