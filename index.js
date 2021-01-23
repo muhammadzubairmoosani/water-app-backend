@@ -7,6 +7,11 @@ const cookieSession = require("cookie-session");
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 var allowedOrigins = [
   process.env.REACT_APP_LOCAL_HOST,
   process.env.REACT_APP_ORIGIN,
