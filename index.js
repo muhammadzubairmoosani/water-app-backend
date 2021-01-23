@@ -8,7 +8,8 @@ const cookieSession = require("cookie-session");
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
@@ -19,8 +20,7 @@ var allowedOrigins = [
 
 app.use(
   cors({
-    mode: "cors",
-    credentials: "include",
+    credentials: true,
     origin: function (origin, callback) {
       // allow requests with no origin
       // (like mobile apps or curl requests)
