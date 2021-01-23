@@ -19,7 +19,8 @@ var allowedOrigins = [
 
 app.use(
   cors({
-    credentials: true,
+    mode: "cors",
+    credentials: "include",
     origin: function (origin, callback) {
       // allow requests with no origin
       // (like mobile apps or curl requests)
