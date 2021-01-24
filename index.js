@@ -12,50 +12,51 @@ var allowedOrigins = [
   process.env.REACT_APP_ORIGIN,
 ];
 
+// function getCorsOptions(req, res, next) {
+//   if (allowedOrigins.indexOf(req.headers.origin) > -1) {
+//     res.set("Access-Control-Allow-Credentials", "true");
+//     res.set("Access-Control-Allow-Origin", req.headers.origin);
+//   } else {
+//     // allow other origins to make unauthenticated CORS requests
+//     res.set("Access-Control-Allow-Origin", "*");
+//   }
+//   next();
+// }
+
 function getCorsOptions(req, res, next) {
-  if (allowedOrigins.indexOf(req.headers.origin) > -1) {
-    res.set("Access-Control-Allow-Credentials", "true");
-    res.set("Access-Control-Allow-Origin", req.headers.origin);
-  } else {
-    // allow other origins to make unauthenticated CORS requests
-    res.set("Access-Control-Allow-Origin", "*");
-  }
+
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Pass to next layer of middleware
   next();
-}
+});
 
-// app.use(function (req, res, next) {
-//   // Website you wish to allow to connect
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-
-//   // Request methods you wish to allow
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-//   );
-
-//   // Request headers you wish to allow
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "X-Requested-With,content-type"
-//   );
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-
-//   // Pass to next layer of middleware
-//   next();
-// });
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 // app.use((req, res, next) => {
 //   // res.header("Access-Control-Allow-Credentials", true);
