@@ -5,7 +5,13 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 
-app.options("*", cors());
+// app.options("*", cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(express.json());
 
 var allowedOrigins = [
