@@ -6,7 +6,7 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 
 // app.options("*", cors());
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -14,14 +14,19 @@ app.use(function(req, res, next) {
 
 app.use(express.json());
 
-var allowedOrigins = [
-    process.env.REACT_APP_LOCAL_HOST,
-    process.env.REACT_APP_ORIGIN
-];
+// var allowedOrigins = [
+//   process.env.REACT_APP_LOCAL_HOST,
+//   process.env.REACT_APP_ORIGIN
+// ];
 
-// app.listen(4000, function () {
-//     console.log("CORS-enabled web server listening on port 4000");
-// });
+
+app.use(
+  cors({
+    credentials: true,
+    origin: true
+  })
+);
+
 // app.use(
 //     cors({
 //         credentials: true,
@@ -38,14 +43,14 @@ var allowedOrigins = [
 // );
 
 app.use(
-    cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        name: "session",
-        keys: [
-            process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-            process.env.REACT_APP_REFRESH_TOKEN_SECRET
-        ]
-    })
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    name: "session",
+    keys: [
+      process.env.REACT_APP_ACCESS_TOKEN_SECRET,
+      process.env.REACT_APP_REFRESH_TOKEN_SECRET
+    ]
+  })
 );
 
 app.use(passport.initialize());
@@ -54,6 +59,6 @@ app.use(passport.session());
 app.use("/", require("./src/routers"));
 
 app.listen(process.env.REACT_APP_PORT, () =>
-    console.log(`server is listing...`)
+  console.log(`server is listing...`)
 );
 mongodb.connection.once("open", () => console.log("database is connected!"));
