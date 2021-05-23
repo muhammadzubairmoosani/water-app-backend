@@ -18,7 +18,7 @@ const cookieSession = require("cookie-session");
 
 // enable CORS without external module
 
-route.use(function(req, res, next) {
+app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
