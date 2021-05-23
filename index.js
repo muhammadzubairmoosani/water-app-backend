@@ -5,21 +5,10 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 
-// app.options("*", cors());
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-
-
-// app.use(cors());
-// app.options('*', cors())
-
 // enable CORS without external module
 
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://pani-vala-server.herokuapp.com/logged-in');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -45,41 +34,12 @@ app.use(function(req, res, next) {
 
 app.use(express.json());
 
-// var allowedOrigins = [
-//   process.env.REACT_APP_LOCAL_HOST,
-//   process.env.REACT_APP_ORIGIN
-// ];
-
-
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: true
-//   })
-// );
-
 app.use(
   cors({
     credentials: true,
     origin: true
   })
 );
-
-
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: function (origin, callback) {
-//       if (allowedOrigins.indexOf(origin) === -1) {
-//         var msg =
-//           "The CORS policy for this site does not " +
-//           "allow access from the specified Origin.";
-//         return callback(new Error(msg), false);
-//       }
-//       return callback(null, true);
-//     }
-//   })
-// );
 
 app.use(
   cookieSession({
@@ -100,4 +60,46 @@ app.use("/", require("./src/routers"));
 app.listen(process.env.REACT_APP_PORT, () =>
   console.log(`server is listing...`)
 );
+
 mongodb.connection.once("open", () => console.log("database is connected!"));
+
+
+// app.options("*", cors());
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+// app.use(cors());
+// app.options('*', cors())
+
+
+// var allowedOrigins = [
+//   process.env.REACT_APP_LOCAL_HOST,
+//   process.env.REACT_APP_ORIGIN
+// ];
+
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: true
+//   })
+// );
+
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         var msg =
+//           "The CORS policy for this site does not " +
+//           "allow access from the specified Origin.";
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     }
+//   })
+// );
