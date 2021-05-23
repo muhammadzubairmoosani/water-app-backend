@@ -1,10 +1,68 @@
-const express = require("express");
-const app = express();
+var express = require('express')
+var cors = require('cors')
 const mongodb = require("./src/config/config");
-const cors = require("cors");
-const passport = require("passport");
-const cookieSession = require("cookie-session");
+var app = express()
 
+var corsOptions = {
+  origin: 'https://www.panivala.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.get('/', cors(corsOptions), function (req, res, next) {
+  res.json({ msg: 'This is CORS-enabled for only example.com.' })
+})
+
+app.listen(process.env.REACT_APP_PORT, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
+
+mongodb.connection.once("open", () => console.log("database is connected!"));
+
+
+
+
+
+// const express = require("express");
+// const app = express();
+// const mongodb = require("./src/config/config");
+// const cors = require("cors");
+// const passport = require("passport");
+// const cookieSession = require("cookie-session");
+
+// app.use(express.json());
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: true
+//   })
+// );
+
+// app.use(
+//   cookieSession({
+//     maxAge: 30 * 24 * 60 * 60 * 1000,
+//     name: "session",
+//     keys: [
+//       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
+//       process.env.REACT_APP_REFRESH_TOKEN_SECRET
+//     ]
+//   })
+// );
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.use("/", require("./src/routers"));
+
+// app.listen(process.env.REACT_APP_PORT, () =>
+//   console.log(`server is listing...`)
+// );
+
+// mongodb.connection.once("open", () => console.log("database is connected!"));
+
+
+
+// ===============================
 // enable CORS without external module
 
 // app.use(function(req, res, next) {
@@ -31,37 +89,6 @@ const cookieSession = require("cookie-session");
 //   next();
 // });
 
-
-app.use(express.json());
-
-app.use(
-  cors({
-    credentials: true,
-    origin: true
-  })
-);
-
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    name: "session",
-    keys: [
-      process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-      process.env.REACT_APP_REFRESH_TOKEN_SECRET
-    ]
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use("/", require("./src/routers"));
-
-app.listen(process.env.REACT_APP_PORT, () =>
-  console.log(`server is listing...`)
-);
-
-mongodb.connection.once("open", () => console.log("database is connected!"));
 
 
 // app.options("*", cors());
