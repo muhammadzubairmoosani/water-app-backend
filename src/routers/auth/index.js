@@ -2,6 +2,13 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../../passport");
 
+router.options('/logged-in', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.end();
+});
+
 router.get("/logged-in", (req, res) => {
   if (req.user) return res.send(req.user);
   return res.send(false);
