@@ -14,9 +14,9 @@ const passport = require("../../passport");
 //   return res.send(false);
 // });
 
-router.get('/logged-in', cors(corsOptions), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for only example.com.' })
-})
+// router.get('/logged-in', cors(corsOptions), function (req, res, next) {
+//   res.json({ msg: 'This is CORS-enabled for only example.com.' })
+// })
 
 router.post("/signup", (req, res, next) => {
   passport.authenticate("local-signup", (error, data, message) => {
