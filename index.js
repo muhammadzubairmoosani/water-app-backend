@@ -13,8 +13,16 @@ const cookieSession = require("cookie-session");
 // });
 
 
-app.use(cors());
-app.options('*', cors())
+// app.use(cors());
+// app.options('*', cors())
+
+// enable CORS without external module
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 app.use(express.json());
 
