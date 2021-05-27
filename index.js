@@ -14,7 +14,11 @@ app.use(express.json());
 //   })
 // );
 
-app.use(cors({ origin: "*" }));
+// app.use(cors({}))
+
+// app.use(cors({ origin: "*" }));
+
+
 // app.use(
 //   cookieSession({
 //     maxAge: 30 * 24 * 60 * 60 * 1000,

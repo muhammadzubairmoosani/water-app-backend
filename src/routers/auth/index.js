@@ -10,6 +10,7 @@ const passport = require("../../passport");
 // });
 
 router.get("/logged-in", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   if (req.user) return res.send(req.user);
   return res.send({ user: null });
 });
