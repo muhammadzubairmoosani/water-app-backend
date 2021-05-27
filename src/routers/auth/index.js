@@ -9,10 +9,10 @@ const passport = require("../../passport");
 //   res.end();
 // });
 
-// router.get("/logged-in", (req, res) => {
-//   if (req.user) return res.send(req.user);
-//   return res.send(false);
-// });
+router.get("/logged-in", (req, res) => {
+  if (req.user) return res.send(req.user);
+  return res.send({ user: null });
+});
 
 // router.get('/logged-in', cors(corsOptions), function (req, res, next) {
 //   res.json({ msg: 'This is CORS-enabled for only example.com.' })

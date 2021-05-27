@@ -1,43 +1,20 @@
-var express = require('express')
-var cors = require('cors')
+const express = require("express");
+const app = express();
 const mongodb = require("./src/config/config");
-var app = express()
+const cors = require("cors");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 
-var corsOptions = {
-  origin: 'https://www.panivala.com/',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.get('/logged-in', cors(corsOptions), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for only example.com.' })
-})
-
-app.listen(process.env.REACT_APP_PORT, function () {
-  console.log('CORS-enabled web server listening on port 80')
-})
-
-mongodb.connection.once("open", () => console.log("database is connected!"));
-
-
-
-
-
-// const express = require("express");
-// const app = express();
-// const mongodb = require("./src/config/config");
-// const cors = require("cors");
-// const passport = require("passport");
-// const cookieSession = require("cookie-session");
-
-// app.use(express.json());
+app.use(express.json());
 
 // app.use(
 //   cors({
 //     credentials: true,
-//     origin: true
+//     origin: "*"
 //   })
 // );
 
+// app.use(cors({ origin: "*" }));
 // app.use(
 //   cookieSession({
 //     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -49,16 +26,16 @@ mongodb.connection.once("open", () => console.log("database is connected!"));
 //   })
 // );
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.use("/", require("./src/routers"));
+app.use("/", require("./src/routers"));
 
-// app.listen(process.env.REACT_APP_PORT, () =>
-//   console.log(`server is listing...`)
-// );
+app.listen(process.env.REACT_APP_PORT, () =>
+  console.log(`server is listing...`)
+);
 
-// mongodb.connection.once("open", () => console.log("database is connected!"));
+mongodb.connection.once("open", () => console.log("database is connected!"));
 
 
 
