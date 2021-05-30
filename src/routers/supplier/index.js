@@ -17,6 +17,13 @@ router.get("/supplier-detail/:id", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/suppliers/:searchKey", (req, res, next) => {
+  console.log(req.params)
+  User.find({ username: req.params.searchKey })
+    .then((snap) => res.send(snap))
+    .catch(next);
+});
+
 const supplierRouters = router;
 
 module.exports = supplierRouters;
