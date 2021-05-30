@@ -5,7 +5,7 @@ const passport = require("../../passport");
 router.get("/logged-in", (req, res) => {
   if (req.user) return res.send(req.user);
 
-  return res.send({ user: null });
+  return res.send(false);
 });
 
 
