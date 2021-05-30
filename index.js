@@ -7,28 +7,36 @@ const cookieSession = require("cookie-session");
 
 app.use(express.json());
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: "*"
-//   })
-// );
+const allowedOrigins = [
+  process.env.REACT_APP_LOCAL_HOST,
+  process.env.REACT_APP_ORIGIN,
+];
 
-// app.use(cors({}))
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
-// app.use(cors({ origin: "*" }));
-
-
-// app.use(
-//   cookieSession({
-//     maxAge: 30 * 24 * 60 * 60 * 1000,
-//     name: "session",
-//     keys: [
-//       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-//       process.env.REACT_APP_REFRESH_TOKEN_SECRET
-//     ]
-//   })
-// );
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    name: "session",
+    keys: [
+      process.env.REACT_APP_ACCESS_TOKEN_SECRET,
+      process.env.REACT_APP_REFRESH_TOKEN_SECRET
+    ]
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

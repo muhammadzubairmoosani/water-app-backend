@@ -2,27 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../../passport");
 
-// router.options('/logged-in', function (req, res) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader('Access-Control-Allow-Methods', '*');
-//   res.setHeader("Access-Control-Allow-Headers", "*");
-//   res.end();
-// });
-
 router.get("/logged-in", (req, res) => {
-
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader("Access-Control-Allow-Headers", "*");
-
-  
   if (req.user) return res.send(req.user);
+
   return res.send({ user: null });
 });
 
-// router.get('/logged-in', cors(corsOptions), function (req, res, next) {
-//   res.json({ msg: 'This is CORS-enabled for only example.com.' })
-// })
 
 router.post("/signup", (req, res, next) => {
   passport.authenticate("local-signup", (error, data, message) => {
