@@ -7,8 +7,19 @@ const cookieSession = require("cookie-session");
 
 // app.enableCors();
 // app.use(express.enableCors())
-app.options('*', cors())
+// app.options('*', cors())
+
 // app.use(cors());
+
+app.use(cors());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use(express.json());
 
@@ -38,8 +49,8 @@ app.use(
     name: "session",
     keys: [
       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-      process.env.REACT_APP_REFRESH_TOKEN_SECRET
-    ]
+      process.env.REACT_APP_REFRESH_TOKEN_SECRET,
+    ],
   })
 );
 
