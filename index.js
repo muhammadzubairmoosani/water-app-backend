@@ -7,8 +7,8 @@ const cookieSession = require("cookie-session");
 
 // app.enableCors();
 // app.use(express.enableCors())
-
-app.use(cors());
+app.options('*', cors())
+// app.use(cors());
 
 app.use(express.json());
 
