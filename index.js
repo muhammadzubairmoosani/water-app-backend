@@ -7,25 +7,35 @@ const cookieSession = require("cookie-session");
 
 app.use(express.json());
 
-const allowedOrigins = [
-  process.env.REACT_APP_LOCAL_HOST,
-  process.env.REACT_APP_ORIGIN,
-];
+// app.use(cors({
+//   origin: '*'
+// }))
 
 app.use(
   cors({
-    credentials: true,
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not " +
-          "allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: 'http://localhost:3000'
   })
-);
+)
+
+// const allowedOrigins = [
+//   process.env.REACT_APP_LOCAL_HOST,
+//   process.env.REACT_APP_ORIGIN,
+// ];
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         const msg =
+//           "The CORS policy for this site does not " +
+//           "allow access from the specified Origin.";
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 app.use(
   cookieSession({
