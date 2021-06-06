@@ -4,7 +4,7 @@ const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const port = process.env.REACT_APP_PORT || 4000
+const port = 'https://pani-vala-server.herokuapp.com/' || 4000
 app.use(express.json());
 
 
@@ -18,7 +18,7 @@ app.use(
   })
 )
 
-console.log("REACT_APP_ORIGIN ===== ",process.env.REACT_APP_ORIGIN)
+console.log("REACT_APP_ORIGIN ===== ", process.env.REACT_APP_ORIGIN)
 
 // const allowedOrigins = [
 //   process.env.REACT_APP_LOCAL_HOST,
