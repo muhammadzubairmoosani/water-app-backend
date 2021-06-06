@@ -4,8 +4,9 @@ const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-
+const port = process.env.REACT_APP_PORT || 4000
 app.use(express.json());
+
 
 // app.use(cors({
 //   origin: '*'
@@ -13,9 +14,11 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'http://172.17.0.1:3000'
+    origin: process.env.REACT_APP_ORIGIN
   })
 )
+
+console.log("REACT_APP_ORIGIN ===== ",process.env.REACT_APP_ORIGIN)
 
 // const allowedOrigins = [
 //   process.env.REACT_APP_LOCAL_HOST,
@@ -53,8 +56,8 @@ app.use(passport.session());
 
 app.use("/", require("./src/routers"));
 
-app.listen(process.env.REACT_APP_PORT, () =>
-  console.log(`server is listing...`)
+app.listen(port, () =>
+  console.log(`server is listing on ${port}`)
 );
 
 mongodb.connection.once("open", () => console.log("database is connected!"));
