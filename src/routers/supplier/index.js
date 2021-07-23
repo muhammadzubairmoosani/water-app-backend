@@ -7,20 +7,26 @@ router.get("/suppliers/:skip/:limit", (req, res, next) => {
   User.find({})
     .skip(parseInt(skip))
     .limit(parseInt(limit))
-    .then((snap) => res.send(snap))
+    .then(data => res.send(data))
     .catch(next);
 });
 
 router.get("/supplier-detail/:id", (req, res, next) => {
   User.findById(req.params.id)
-    .then((snap) => res.send(snap))
+    .then(data => res.send(data))
     .catch(next);
 });
 
 router.get("/suppliers/:searchKey", (req, res, next) => {
   User.find({ username: req.params.searchKey })
-    .then((snap) => res.send(snap))
+    .then(data => res.send(data))
     .catch(next);
+});
+
+router.get("/search", (req, res, next) => {
+  User.find({ username: new RegExp(req.query.key, "i") })
+    .then(data => res.send(data))
+    .catch(next)
 });
 
 const supplierRouters = router;
