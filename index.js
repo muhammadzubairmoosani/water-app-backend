@@ -8,22 +8,24 @@ const port =  4000
 app.use(express.json());
 
 
-// app.use(cors({
-//   origin: '*'
-// }))
+// console.log("host", allowedOrigins);
 
-
-// const allowedOrigins = [
-//   process.env.REACT_APP_LOCAL_HOST,
-//   process.env.REACT_APP_ORIGIN,
-// ];
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+  })
+)
 
 // app.use(
 //   cors({
 //     credentials: true,
 //     origin: function (origin, callback) {
+//       // allow requests with no origin
+//       // (like mobile apps or curl requests)
+//       // if(!origin) return callback(null, true);
 //       if (allowedOrigins.indexOf(origin) === -1) {
-//         const msg =
+//         var msg =
 //           "The CORS policy for this site does not " +
 //           "allow access from the specified Origin.";
 //         return callback(new Error(msg), false);
@@ -33,13 +35,6 @@ app.use(express.json());
 //   })
 // );
 
-
-app.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
-  })
-)
 
 app.use(
   cookieSession({

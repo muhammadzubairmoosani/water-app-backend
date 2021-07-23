@@ -2,18 +2,19 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../../schemas");
 
-router.get("/suppliers/:skip/:limit", (req, res, next) => {
-  const { skip, limit } = req.params;
-  User.find({})
+router.get("/suppliers/:skip/:limit/:key", (req, res, next) => {
+
+  const { skip, limit, key } = req.params;
+  User.find(key !== 'null' ? { username: new RegExp(key, "i") } : {})
     .skip(parseInt(skip))
     .limit(parseInt(limit))
-    .then((snap) => res.send(snap))
+    .then(data => res.send(data))
     .catch(next);
 });
 
 router.get("/supplier-detail/:id", (req, res, next) => {
   User.findById(req.params.id)
-    .then((snap) => res.send(snap))
+    .then(data => res.send(data))
     .catch(next);
 });
 
