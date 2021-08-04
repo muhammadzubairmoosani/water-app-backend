@@ -5,12 +5,12 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 // const port = process.env.PORT || 4000;
-const port =  4000;
+const port = 4000;
 app.use(express.json());
 
 
 // console.log("host", allowedOrigins);
-const allowedOrigins = ['http://localhost:3000', process.env.ORIGIN]
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
 
 // app.use(
 //   cors({
@@ -23,7 +23,7 @@ app.use(
   cors({
     credentials: true,
     origin: (origin, callback) => {
-      console.log("origin",origin)
+      console.log("origin", origin)
       if (allowedOrigins.indexOf(origin) === -1) {
         var msg =
           "The CORS policy for this site does not " +
