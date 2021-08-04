@@ -10,12 +10,12 @@ app.use(express.json());
 
 // console.log("host", allowedOrigins);
 
-app.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
-  })
-)
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000'
+//   })
+// )
 
 // app.use(
 //   cors({
@@ -50,7 +50,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", require("./src/routers"));
+app.get("/simple-cors", cors(), (req, res) => {
+  console.info("GET /simple-cors");
+  res.json({
+    text: "Simple CORS requests are working. [GET]"
+  });
+});
+
+// app.use("/", require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
