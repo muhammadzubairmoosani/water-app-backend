@@ -4,11 +4,13 @@ const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const port = process.env.PORT || 4000;
+// const port = process.env.PORT || 4000;
+const port =  4000;
 app.use(express.json());
 
 
 // console.log("host", allowedOrigins);
+const allowedOrigins = ['http://localhost:3000', process.env.ORIGIN]
 
 // app.use(
 //   cors({
@@ -17,23 +19,21 @@ app.use(express.json());
 //   })
 // )
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: function (origin, callback) {
-//       // allow requests with no origin
-//       // (like mobile apps or curl requests)
-//       // if(!origin) return callback(null, true);
-//       if (allowedOrigins.indexOf(origin) === -1) {
-//         var msg =
-//           "The CORS policy for this site does not " +
-//           "allow access from the specified Origin.";
-//         return callback(new Error(msg), false);
-//       }
-//       return callback(null, true);
-//     },
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: (origin, callback) => {
+      console.log("origin",origin)
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 
 // app.use(
@@ -41,8 +41,8 @@ app.use(express.json());
 //     maxAge: 30 * 24 * 60 * 60 * 1000,
 //     name: "session",
 //     keys: [
-//       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-//       process.env.REACT_APP_REFRESH_TOKEN_SECRET
+//       process.env.ACCESS_TOKEN_SECRET,
+//       process.env.REFRESH_TOKEN_SECRET
 //     ]
 //   })
 // );
@@ -50,17 +50,17 @@ app.use(express.json());
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-app.get("/simple-cors", cors(), (req, res) => {
-  console.info("GET /simple-cors");
-  res.json({
-    text: "Simple CORS requests are working. [GET]"
-  });
-});
+// app.get("/simple-cors", cors(), (req, res) => {
+//   console.info("GET /simple-cors");
+//   res.json({
+//     text: "Simple CORS requests are working. [GET]"
+//   });
+// });
 
-// app.use("/", require("./src/routers"));
+app.use("/", require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
 );
 
-// mongodb.connection.once("open", () => console.log("database is connected!"));
+mongodb.connection.once("open", () => console.log("database is connected!"));
