@@ -4,7 +4,7 @@ const mongodb = require("./src/config/config");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const port =  4000
+const port = process.env.PORT || 4000;
 app.use(express.json());
 
 
@@ -36,19 +36,19 @@ app.use(express.json());
 // );
 
 
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    name: "session",
-    keys: [
-      process.env.REACT_APP_ACCESS_TOKEN_SECRET,
-      process.env.REACT_APP_REFRESH_TOKEN_SECRET
-    ]
-  })
-);
+// app.use(
+//   cookieSession({
+//     maxAge: 30 * 24 * 60 * 60 * 1000,
+//     name: "session",
+//     keys: [
+//       process.env.REACT_APP_ACCESS_TOKEN_SECRET,
+//       process.env.REACT_APP_REFRESH_TOKEN_SECRET
+//     ]
+//   })
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.get("/simple-cors", cors(), (req, res) => {
   console.info("GET /simple-cors");
