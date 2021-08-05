@@ -57,7 +57,7 @@ app.get("/simple-cors", cors(), (req, res) => {
   });
 });
 
-router.get("/logged-in", cors(), (req, res) => {
+app.get("/logged-in", cors(), (req, res) => {
   if (req.user) return res.send(req.user);
 
   return res.send(false);
