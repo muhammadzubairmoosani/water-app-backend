@@ -50,14 +50,20 @@ const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', proce
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// app.get("/simple-cors", cors(), (req, res) => {
-//   console.info("GET /simple-cors");
-//   res.json({
-//     text: "Simple CORS requests are working. [GET]"
-//   });
-// });
+app.get("/simple-cors", cors(), (req, res) => {
+  console.info("GET /simple-cors");
+  res.json({
+    text: "Simple CORS requests are working. [GET]"
+  });
+});
 
-app.use("/", cors(), require("./src/routers"));
+router.get("/logged-in", cors(), (req, res) => {
+  if (req.user) return res.send(req.user);
+
+  return res.send(false);
+});
+
+// app.use("/", cors(), require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
