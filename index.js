@@ -59,11 +59,11 @@ app.get("/simple-cors", cors(), (req, res) => {
   });
 });
 
-// app.get("/logged-in", cors(), (req, res) => {
-//   if (req.user) return res.send(req.user);
+app.get("/logged-in", cors(), (req, res) => {
+  if (req.user) return res.send(req.user);
 
-//   return res.send(false);
-// });
+  return res.send(false);
+});
 
 // app.use("/", cors(), require("./src/routers"));
 
