@@ -10,10 +10,13 @@ app.use(express.json());
 
 // console.log(process.env.PORT)
 
+// app.use(cors())
+
 app.use(cors({
   credentials: true,
   origin: 'https://pani-wala-f7ad8.web.app/'
 }))
+
 // console.log("host", allowedOrigins);
 // const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
 
