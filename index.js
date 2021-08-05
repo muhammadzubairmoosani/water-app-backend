@@ -19,21 +19,21 @@ const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', proce
 //   })
 // )
 
-app.use(
-  cors({
-    credentials: true,
-    origin: (origin, callback) => {
-      console.log("origin", origin)
-      if (allowedOrigins.indexOf(origin) === -1) {
-        var msg =
-          "The CORS policy for this site does not " +
-          "allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: (origin, callback) => {
+//       console.log("origin", origin)
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         var msg =
+//           "The CORS policy for this site does not " +
+//           "allow access from the specified Origin.";
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 
 // app.use(
@@ -57,7 +57,7 @@ app.use(
 //   });
 // });
 
-app.use("/", require("./src/routers"));
+app.use("/",cors(), require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
