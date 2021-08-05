@@ -8,9 +8,11 @@ const port = process.env.PORT || 4000;
 // const port = 4000;
 app.use(express.json());
 
+console.log(process.env.PORT)
+
 
 // console.log("host", allowedOrigins);
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
+// const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
 
 // app.use(
 //   cors({
@@ -57,11 +59,11 @@ app.get("/simple-cors", cors(), (req, res) => {
   });
 });
 
-app.get("/logged-in", cors(), (req, res) => {
-  if (req.user) return res.send(req.user);
+// app.get("/logged-in", cors(), (req, res) => {
+//   if (req.user) return res.send(req.user);
 
-  return res.send(false);
-});
+//   return res.send(false);
+// });
 
 // app.use("/", cors(), require("./src/routers"));
 
@@ -69,4 +71,4 @@ app.listen(port, () =>
   console.log(`server is listing on ${port}`)
 );
 
-mongodb.connection.once("open", () => console.log("database is connected!"));
+// mongodb.connection.once("open", () => console.log("database is connected!"));
