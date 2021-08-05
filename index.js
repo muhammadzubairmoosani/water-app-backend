@@ -57,7 +57,7 @@ const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', proce
 //   });
 // });
 
-app.use("/",cors(), require("./src/routers"));
+// app.use("/",cors(), require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
