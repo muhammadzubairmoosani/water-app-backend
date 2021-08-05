@@ -10,7 +10,9 @@ app.use(express.json());
 
 // console.log(process.env.PORT)
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://www.panivala.com/'
+}))
 // console.log("host", allowedOrigins);
 // const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
 
