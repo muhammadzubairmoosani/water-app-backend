@@ -5,8 +5,8 @@ const { User } = require("../../schemas");
 router.get("/suppliers/:skip/:limit/:key", (req, res, next) => {
 
   const { skip, limit, key } = req.params;
-  // User.find(key !== 'null' ? { username: new RegExp(key, "i") } : {})
-  User.find({})
+  User.find(key !== 'null' ? { username: new RegExp(key, "i") } : {})
+  // User.find({})
     .skip(parseInt(skip))
     .limit(parseInt(limit))
     .then(data => res.send(data))
