@@ -58,13 +58,13 @@ app.get("/simple-cors", (req, res) => {
   });
 });
 
-app.get("/logged-in", (req, res) => {
-  if (req.user) return res.send(req.user);
+// app.get("/logged-in", (req, res) => {
+//   if (req.user) return res.send(req.user);
 
-  return res.send(false);
-});
+//   return res.send(false);
+// });
 
-// app.use("/", cors(), require("./src/routers"));
+app.use("/", require("./src/routers"));
 
 app.listen(port, () =>
   console.log(`server is listing on ${port}`)
