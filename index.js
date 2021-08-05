@@ -10,9 +10,9 @@ app.use(express.json());
 
 // console.log(process.env.PORT)
 
-
+app.use(cors())
 // console.log("host", allowedOrigins);
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
+// const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', process.env.ORIGIN]
 
 // app.use(
 //   cors({
@@ -21,20 +21,20 @@ const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/', proce
 //   })
 // )
 
-app.use(
-  cors({
-    credentials: true,
-    origin: (origin, callback) => {
-      if (allowedOrigins.indexOf(origin) === -1) {
-        var msg =
-          "The CORS policy for this site does not " +
-          "allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: (origin, callback) => {
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         var msg =
+//           "The CORS policy for this site does not " +
+//           "allow access from the specified Origin.";
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
 
 
 // app.use(
@@ -51,14 +51,14 @@ app.use(
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-app.get("/simple-cors", cors(), (req, res) => {
+app.get("/simple-cors", (req, res) => {
   console.info("GET /simple-cors");
   res.json({
     text: "Simple CORS requests are working. [GET]"
   });
 });
 
-app.get("/logged-in", cors(), (req, res) => {
+app.get("/logged-in", (req, res) => {
   if (req.user) return res.send(req.user);
 
   return res.send(false);
