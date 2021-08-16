@@ -6,6 +6,8 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 const port = process.env.PORT || 4000;
 // const port = 4000;
+const { User } = require("./src/schemas");
+
 app.use(express.json());
 
 // console.log(process.env.PORT)
@@ -63,6 +65,17 @@ app.use(passport.session());
 //     text: "Simple CORS requests are working. [GET]"
 //   });
 // });
+
+app.use("/suppliers/:skip/:limit/:key", (req, res, next) => {
+  const { skip, limit, key } = req.params;
+
+  User.find(key !== 'null' ? { username: new RegExp(key, "i") } : {})
+    .skip(parseInt(skip))
+    .limit(parseInt(limit))
+    .then(data => res.send(data))
+    .catch(next);
+});
+
 
 app.use("/", require("./src/routers"));
 
