@@ -11,9 +11,7 @@ app.use(express.json());
 
 // console.log(process.env.PORT)
 
-app.use(cors({
-  origin: 'https://www.panivalaa.com/'
-}))
+app.use(cors())
 
 // app.use(cors({
 //   credentials: true,
