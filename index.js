@@ -6,7 +6,6 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 const port = process.env.PORT || 4000;
 // const port = 4000;
-const { User } = require("./src/schemas");
 
 app.use(express.json());
 
