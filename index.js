@@ -12,7 +12,7 @@ app.use(express.json());
 // console.log(process.env.PORT)
 
 app.use(cors({
-  origin: 'https://www.panivala.com/'
+  origin: 'https://www.panivalaa.com/'
 }))
 
 // app.use(cors({
