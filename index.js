@@ -66,17 +66,6 @@ app.use(passport.session());
 //   });
 // });
 
-app.use("/suppliers/:skip/:limit/:key", (req, res, next) => {
-  const { skip, limit, key } = req.params;
-
-  User.find(key !== 'null' ? { username: new RegExp(key, "i") } : {})
-    .skip(parseInt(skip))
-    .limit(parseInt(limit))
-    .then(data => res.send(data))
-    .catch(next);
-});
-
-
 app.use("/", require("./src/routers"));
 
 app.listen(port, () =>
