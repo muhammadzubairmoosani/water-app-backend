@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(cors({
   credentials: true,
-  origin: 'https://www.panivala.com/'
+  origin: 'https://www.panivala.com'
 }))
 
 // app.use(cors({
