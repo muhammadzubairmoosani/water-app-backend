@@ -16,7 +16,9 @@ app.use(express.json());
 //   // origin: 'https://www.panivala.com'
 // }))
 
-app.use(cors())
+app.use(cors({
+  credentials: true
+}))
 
 // app.use(cors({
 //   credentials: true,
