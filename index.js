@@ -53,6 +53,7 @@ app.use(
     maxAge: 30 * 24 * 60 * 60 * 1000,
     name: "session",
     secureProxy: true,
+    secure: true,
     keys: [
       process.env.ACCESS_TOKEN_SECRET,
       process.env.REFRESH_TOKEN_SECRET
