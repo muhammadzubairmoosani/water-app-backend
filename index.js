@@ -52,7 +52,7 @@ app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     name: "session",
-    // secureProxy: true,
+    secureProxy: true,
     keys: [
       process.env.ACCESS_TOKEN_SECRET,
       process.env.REFRESH_TOKEN_SECRET
