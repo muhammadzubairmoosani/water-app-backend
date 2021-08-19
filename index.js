@@ -46,11 +46,13 @@ app.use(cors({
 //   })
 // );
 
+app.set('trust proxy', 1) // trust first proxy
 
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     name: "session",
+    // secureProxy: true,
     keys: [
       process.env.ACCESS_TOKEN_SECRET,
       process.env.REFRESH_TOKEN_SECRET
